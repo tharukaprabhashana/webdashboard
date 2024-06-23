@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -17,27 +17,39 @@ initializeApp(firebaseConfig);
 // Initialize services
 const db = getFirestore();
 
-// Collection reference
+// Collection reference with query to order by rtcDateTime
 const colRef = collection(db, 'bag_data');
+const q = query(colRef, orderBy('rtcDateTime'));
 
-// Get collection data and display it in the table
-getDocs(colRef)
-    .then((snapshot) => {
-        const dataTable = document.getElementById('data-table');
-        snapshot.docs.forEach(doc => {
-            const data = doc.data();
-            const row = document.createElement('tr');
-            const idCell = document.createElement('td');
-            const dataCell = document.createElement('td');
+// Real-time listener to fetch collection data and display it in the table
+onSnapshot(q, (snapshot) => {
+    const dataTable = document.getElementById('data-table');
+    dataTable.innerHTML = ''; // Clear the table before updating with new data
 
-            idCell.textContent = doc.id;
-            dataCell.textContent = JSON.stringify(data); // Convert data to a string to display it
+    snapshot.docs.forEach(doc => {
+        const data = doc.data();
+        const row = document.createElement('tr');
 
-            row.appendChild(idCell);
-            row.appendChild(dataCell);
-            dataTable.appendChild(row);
-        });
-    })
-    .catch((error) => {
-        console.error("Error fetching documents: ", error);
+        // Create cells for each data field
+        const weightCell = document.createElement('td');
+        const rtcDateTimeCell = document.createElement('td');
+        const lockStatusCell = document.createElement('td');
+        const gpsCell = document.createElement('td');
+        const temperatureCell = document.createElement('td');
+
+        weightCell.textContent = data.weight;
+        rtcDateTimeCell.textContent = data.rtcDateTime;
+        lockStatusCell.textContent = data.lockStatus;
+        gpsCell.textContent = data.gps;
+        temperatureCell.textContent = data.temperature;
+
+        row.appendChild(weightCell);
+        row.appendChild(rtcDateTimeCell);
+        row.appendChild(lockStatusCell);
+        row.appendChild(gpsCell);
+        row.appendChild(temperatureCell);
+        dataTable.appendChild(row);
     });
+}, (error) => {
+    console.error("Error fetching documents: ", error);
+});
