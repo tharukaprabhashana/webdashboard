@@ -32,13 +32,42 @@ const TemperatureGraph = () => {
                 label: 'Temperature',
                 data: data.map(d => d.temperature),
                 fill: false,
-                backgroundColor: 'rgb(75, 192, 192)',
-                borderColor: 'rgba(75, 192, 192, 0.2)',
+                backgroundColor: 'white',
+                borderColor: 'white',
             },
         ],
     };
 
-    return <Line data={chartData} />;
+    const options = {
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white', // X-axis labels
+                },
+            },
+            y: {
+                ticks: {
+                    color: 'white', // Y-axis labels
+                },
+            },
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white', // Legend labels
+                },
+            },
+        },
+    };
+
+    return (
+        <div className='tbox' style={{ width: '550px', height: '350px', padding: '15px', margin: '10px', backgroundColor: 'rgba(13, 2, 82, 0.834)', borderRadius: '10px',marginTop:'-370px',position:'absolute',marginLeft:'20px' }}>
+        <h2 style={{ color: 'white' }}>Temperature Data</h2>
+        <Line data={chartData} options={options} width={300} height={350} />
+    </div>
+    );
 };
 
 export default TemperatureGraph;

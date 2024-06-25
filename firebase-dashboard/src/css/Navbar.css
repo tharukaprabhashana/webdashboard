@@ -4,6 +4,11 @@
     box-sizing:border-box;
 }
 .navbar{
-    background-color: aquamarine;
+    background-color:rgba(13, 2, 82, 0.834);
+    height: 80px;
+    color: aliceblue;
   }
-  
+  .titel{
+    padding-top: 18px;
+    padding-left: 10px;
+  }
