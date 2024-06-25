@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
-import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
 // Register all Chart.js components
@@ -23,7 +23,7 @@ const TemperatureGraph = () => {
         });
 
         return () => unsubscribe();
-    }, []);
+      }, []);
 
     const chartData = {
         labels: data.map(d => d.time),
