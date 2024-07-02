@@ -63,7 +63,7 @@ const TemperatureGraph = () => {
     };
 
     return (
-        <div className='tbox' style={{ width: '550px', height: '350px', padding: '15px', margin: '10px', backgroundColor: 'rgba(13, 2, 82, 0.834)', borderRadius: '10px',marginTop:'-370px',position:'absolute',marginLeft:'20px' }}>
+        <div className='tbox' style={{ width: '30%', height: '350px', padding: '15px', margin: '-25% 1%', backgroundColor: 'rgba(13, 2, 82, 0.834)', borderRadius: '10px',marginTop:'-370px',position:'absolute',marginLeft:'20px' }}>
         <h2 style={{ color: 'white' }}>Temperature Data</h2>
         <Line data={chartData} options={options} width={300} height={350} />
     </div>
