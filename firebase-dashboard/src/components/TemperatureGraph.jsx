@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import { collection, onSnapshot, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
+import '../css/Temparature.css'
 
 // Register all Chart.js components
 Chart.register(...registerables);
@@ -63,7 +64,7 @@ const TemperatureGraph = () => {
     };
 
     return (
-        <div className='tbox' style={{ width: '30%', height: '350px', padding: '15px', margin: '-25% 1%', backgroundColor: 'rgba(13, 2, 82, 0.834)', borderRadius: '10px',marginTop:'-370px',position:'absolute',marginLeft:'20px' }}>
+        <div className='tbox'>
         <h2 style={{ color: 'white' }}>Temperature Data</h2>
         <Line data={chartData} options={options} width={300} height={350} />
     </div>

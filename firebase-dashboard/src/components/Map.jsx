@@ -5,7 +5,8 @@ import { db } from '../firebase';
 
 const containerStyle = {
     width: '100%',
-    height: '100vh'
+    height: '100vh',
+    position:'relative'
 };
 
 const center = {
@@ -35,7 +36,7 @@ const Map = () => {
     }, []);
 
     return (
-    
+        <div style={{display: "relative"}}>
         <LoadScript googleMapsApiKey="AIzaSyDeXzRMC_rcW0CHKiSQlN-qLJfl_WXFfH0">
             <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
                 {gpsData.map((position, index) => (
@@ -43,6 +44,7 @@ const Map = () => {
                 ))}
             </GoogleMap>
         </LoadScript>
+        </div>
     );
 };
 

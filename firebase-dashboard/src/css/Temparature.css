@@ -1,0 +1,28 @@
+
+.tbox {
+    width:35%; 
+    height: 40%;
+    padding: 15px;
+    top: 400px;
+    background-color:rgba(13, 2, 82, 0.834);
+    border-radius:10px;
+    position:absolute;
+    margin-left:20px;
+}
+@media (max-width: 400px) {
+    .tbox {
+        height: 250px; 
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+@media (max-width: 300px) {
+    .tbox {
+        height: 250px; 
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+
