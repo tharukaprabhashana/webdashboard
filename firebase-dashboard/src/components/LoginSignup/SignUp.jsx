@@ -1,6 +1,7 @@
 import React from 'react'
 import './LoginSignup.css';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase'; // Import Firebase auth
 
 
 function SignUp() {
@@ -8,33 +9,55 @@ function SignUp() {
     const clickSignIn = ()=>{
         navigator("/SignIn");
     }
-    const onSignUp = () => {
-      navigator("/");
-    }
+
+    const onSignUp = (e) => {
+      e.preventDefault();
+      // get user info
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const conpassword = document.getElementById('confirm-signup-password').value;
+
+
+      if(password == conpassword){
+        // sign up the user
+        auth.createUserWithEmailAndPassword(email, password, conpassword)
+        .then(cred => {
+          console.log('User signed up:', cred.user);  
+          navigator("/");
+        }).catch(err => {
+            console.error("Error signing up:", err);
+        });
+      }else{
+        alert("Password doesn't match the confirm password!");
+      }
+
+      
+  }
     
   return (
-    <div className='login-signup-container'>
+    <div className='login-signup-container' id="modal-signup">
     <div className='container'>
         <div className='left'>
             <>
             <h1 style={{textAlign:'center',color:'rgba(25, 25, 113, 0.933)'}}>Sign up</h1>
             </>
 
-            <form>
+            <form id="signup-form">
             <div className='input'>
             <>
             <img src='https://img.icons8.com/?size=100&id=77883&format=png&color=000000' style={{width:'20px'}} />
-            <input type='text' placeholder="Email" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}  /><br />
+             
+          <input type="email" id="signup-email" placeholder="Email" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}  /><br />
             </>
             <br />
             <>
             <img src='https://img.icons8.com/?size=100&id=59855&format=png&color=000000' style={{width:'20px'}}/>
-            <input type='password' placeholder="Password" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}/>
+            <input type='password' id="signup-password" placeholder="Password" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}/>
             </>
             <br /><br />
             <>
             <img src='https://img.icons8.com/?size=100&id=59855&format=png&color=000000' style={{width:'20px'}}/>
-            <input type='password' placeholder="Confirm Password" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}/>
+            <input type='password' id="confirm-signup-password" placeholder="Confirm Password" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}/>
             </>
             <br /><br />
             <>
@@ -49,7 +72,7 @@ function SignUp() {
                 fontSize: '16px',
                 cursor: 'pointer',
                 margin: '10px auto',
-              }} onClick={()=>onSignUp()}
+              }} onClick={(e)=>onSignUp(e)}
             >Sign up</button>
             </> 
             </div>
@@ -84,5 +107,6 @@ function SignUp() {
     </div>
   )
 }
+
 
 export default SignUp

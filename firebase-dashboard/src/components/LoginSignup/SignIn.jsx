@@ -1,37 +1,50 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { auth } from '../../firebase'; // Import Firebase auth
 
     
 
 function SignIn() { 
 
   const navigator = useNavigate();
+
     const clickSignUp = ()=>{
         navigator("/SignUp");
     }
-    const onSignIn = () => {
-      navigator("/");
-    }
+    const onSignIn = (e) => {
+
+      e.preventDefault();
+
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      auth.signInWithEmailAndPassword(email, password).then(cred => {
+        console.log('User signed in:', cred.user);  
+        navigator("/");
+      }).catch(err => {
+          console.error("Error signing in:", err);
+      });
+  }
+
 
   return (
-    <div className='login-signup-container'>
+    <div className='login-signup-container' id="modal-login">
     <div className='container'>
         <div className='left'>
             <>
             <h1 style={{textAlign:'center',color:'rgba(25, 25, 113, 0.933)'}}>Sign in</h1>
             </>
 
-            <form>
+            <form id="login-form">
             <div className='input'>
             <>
             <img src='https://img.icons8.com/?size=100&id=77883&format=png&color=000000' style={{width:'20px'}} />
-            <input type='text' placeholder="Email" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}  /><br />
+            <input type='text' id="login-email" placeholder="Email" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}  /><br />
             </>
             <br />
             <>
             <img src='https://img.icons8.com/?size=100&id=59855&format=png&color=000000' style={{width:'20px'}}/>
-            <input type='password' placeholder="Password" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}/>
+            <input type='password' id="login-password" placeholder="Password" style={{width:'50%',height:'30px',border:'none',borderRadius:'4px ',boxShadow:' 0 1px 2px rgba(0, 0, 0, 0.56)'}}/>
             </>
             <br /><br />
             <>
@@ -46,7 +59,7 @@ function SignIn() {
                 borderRadius: '4px',
                 fontSize: '16px',
                 cursor: 'pointer'
-              }} onClick={()=>onSignIn()}
+              }} onClick={(e)=>onSignIn(e)}
             >Sign in</button>
             </> 
             </div>
@@ -82,5 +95,6 @@ function SignIn() {
     </div>
   )
 }
+
 
 export default SignIn
