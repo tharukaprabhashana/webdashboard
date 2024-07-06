@@ -8,12 +8,14 @@ import './App.css'
 
 const App = () => {
     return (
+        <div className="App">
         <div>
             <div><Navbar /></div>
             <div><Map /></div>
             <div><TemperatureGraph /></div>
             <div><LatestData /></div>  
             
+        </div>
         </div>
     );
 };
