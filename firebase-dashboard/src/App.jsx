@@ -4,7 +4,9 @@ import TemperatureGraph from './components/TemperatureGraph';
 import Map from './components/Map';
 import LatestData from './components/LatestData';
 import Navbar from './components/Navbar';
-import './App.css'
+import './App.css';
+
+
 
 const App = () => {
     return (
@@ -12,8 +14,7 @@ const App = () => {
             <div><Navbar /></div>
             <div><Map /></div>
             <div><TemperatureGraph /></div>
-            <div><LatestData /></div>  
-            
+            <div><LatestData /></div> 
         </div>
     );
 };
