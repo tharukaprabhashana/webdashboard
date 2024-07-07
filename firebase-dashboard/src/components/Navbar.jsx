@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <div className="navbar">
         <h1 className="titel">
-        Bag Data Dashboard
+        Tour-Tech Backpack Dashboard
         </h1>
     </div>
   )

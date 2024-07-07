@@ -20,7 +20,7 @@ const App = () => {
     return (
         <div className="App">
         <div>
-            <div>{isLogin ? "logged" : "not logged"}</div>
+            {/* <div>{isLogin ? "logged" : "not logged"}</div> */}
             <div><Navbar /></div>
             <div><Map /></div>
             <div><TemperatureGraph /></div>
