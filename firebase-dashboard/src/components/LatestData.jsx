@@ -25,7 +25,7 @@ const LatestData = () => {
                 setLatestData({});
             }
         }, (err) => {
-            console.error('Error fetching latest data:', err);
+            console.error('Error Fetching Latest Data:', err);
             setError(err);
         });
 
